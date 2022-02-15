@@ -18,24 +18,25 @@ import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ElevatorSubsystem extends SubsystemBase {
+public class Staircase extends SubsystemBase {
 
-  private WPI_VictorSPX elevatorVictorSPX = new WPI_VictorSPX(Constants.kelevatorRaise);
+  private WPI_VictorSPX StaircaseVictorSPX = new WPI_VictorSPX(Constants.StaircasePort);
+  
   /**
    * Creates a new ElevatorSubsystem.
    */
   
-  public ElevatorSubsystem() {
+  public Staircase() {
 
   }
   public void raise(){
-    elevatorVictorSPX.set(ControlMode.PercentOutput, 0.8);
+    StaircaseVictorSPX.set(ControlMode.PercentOutput, 0.8);
   }
   public void lower(){
-    elevatorVictorSPX.set(ControlMode.PercentOutput, -0.8);
+    StaircaseVictorSPX.set(ControlMode.PercentOutput, -0.8);
   }
   public void stop(){
-    elevatorVictorSPX.set(ControlMode.PercentOutput, 0);
+    StaircaseVictorSPX.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

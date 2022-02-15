@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.Harambe;
+import frc.robot.subsystems.Staircase;
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
@@ -26,18 +27,24 @@ import frc.robot.commands.AutonomousTime;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
   // The robot's subsystems
-  private final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem ();
+  private final Harambe m_Harambe = new Harambe ();
   private final  Drivetrain m_drivetrain = new Drivetrain ();
+  private final  Staircase m_Staircase = new Staircase ();
+
   // The robot's commands
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser;
 
   // Sticks
-  private final Joystick m_driverstick = new Joystick(Constants.DRIVERSTICKPORT);
+  private final XboxController m_driverstick = new XboxController(Constants.DRIVERSTICKPORT);
+  private final Joystick m_operatorstick = new Joystick(Constants.OPERATORSTICKPORT);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
     // Configure the button bindings
     configureButtonBindings();
 	
@@ -46,7 +53,7 @@ public class RobotContainer {
 
     // Set default Teleop command
     m_drivetrain.setDefaultCommand(
-      new RunCommand(() -> m_drivetrain.manualDrive(-m_driverstick.getY(), m_driverstick.getX()), m_drivetrain));
+      new RunCommand(() -> m_drivetrain.manualDrive(-m_driverstick.getLeftY(), m_driverstick.getRightX()), m_drivetrain));
        
     // Setup autonomous select commands
     m_chooser = new SendableChooser<>();
@@ -64,18 +71,29 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(m_driverstick, Constants.kelevatorRaise).whenPressed(
-      new InstantCommand(m_elevatorSubsystem::raise, m_elevatorSubsystem)
+    new JoystickButton(m_operatorstick, Constants.OPHarambeStrong).whenPressed(
+      new InstantCommand(m_Harambe::raise, m_Harambe)
     ).whenReleased(
-      new InstantCommand(m_elevatorSubsystem::stop, m_elevatorSubsystem)
+      new InstantCommand(m_Harambe::stop, m_Harambe)
     );
 
-    new JoystickButton(m_driverstick, Constants.kelevatorLower).whenPressed(
-      new InstantCommand(m_elevatorSubsystem::lower, m_elevatorSubsystem)
+    new JoystickButton(m_operatorstick, Constants.OPHarambeWeak).whenPressed(
+      new InstantCommand(m_Harambe::lower, m_Harambe)
     ).whenReleased(
-      new InstantCommand(m_elevatorSubsystem::stop, m_elevatorSubsystem)
+      new InstantCommand(m_Harambe::stop, m_Harambe)
     );
-    
+
+    new JoystickButton(m_operatorstick, Constants.OPStaircaseUp).whenPressed(
+      new InstantCommand(m_Staircase::lower, m_Staircase)
+    ).whenReleased(
+      new InstantCommand(m_Staircase::stop, m_Staircase)
+    );
+
+    new JoystickButton(m_operatorstick, Constants.OPStaricasDown).whenPressed(
+      new InstantCommand(m_Staircase::lower, m_Harambe)
+    ).whenReleased(
+      new InstantCommand(m_Staircase::stop, m_Staircase)
+    );
   }
 
   /**

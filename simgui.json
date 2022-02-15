@@ -36,6 +36,11 @@
           "open": true
         }
       }
+    },
+    "RoboRIO": {
+      "RoboRIO Input": {
+        "open": true
+      }
     }
   },
   "NTProvider": {
@@ -43,11 +48,13 @@
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Drivetrain": "Subsystem",
       "/LiveWindow/ElevatorSubsystem": "Subsystem",
+      "/LiveWindow/Staircase": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/Victor SPX [2]": "Motor Controller",
       "/LiveWindow/Ungrouped/Victor SPX [4]": "Motor Controller",
       "/LiveWindow/Ungrouped/Victor SPX [5]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Victor SPX [6]": "Motor Controller",
       "/SmartDashboard/SendableChooser[0]": "String Chooser"
     },
     "windows": {
