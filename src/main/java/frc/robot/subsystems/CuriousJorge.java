@@ -16,25 +16,25 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Constants;
 
-public class Harambe extends SubsystemBase {
+public class CuriousJorge extends SubsystemBase {
 
-  private WPI_VictorSPX HarambeVictorSPX = new WPI_VictorSPX(Constants.HarambePort);
+  private WPI_VictorSPX curiousJorgeVictorSPX = new WPI_VictorSPX(Constants.CuriousJorge);
   
   /**
    * Creates a new ElevatorSubsystem.
    */
   
-  public Harambe() {
+  public CuriousJorge() {
 
   }
-  public void strong(){
-    HarambeVictorSPX.set(ControlMode.PercentOutput, 0.8);
+  public void in(){
+    curiousJorgeVictorSPX.set(ControlMode.PercentOutput, 0.8);
   }
-  public void weak(){
-    HarambeVictorSPX.set(ControlMode.PercentOutput, -0.8);
+  public void out(){
+    curiousJorgeVictorSPX.set(ControlMode.PercentOutput, -0.8);
   }
   public void stop(){
-    HarambeVictorSPX.set(ControlMode.PercentOutput, 0);
+    curiousJorgeVictorSPX.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

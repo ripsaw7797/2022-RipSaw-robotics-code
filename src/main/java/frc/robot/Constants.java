@@ -13,7 +13,9 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    
+
+    // Encoders   Rambo
+
     // PWM
 
     // DIO
@@ -25,19 +27,26 @@ public final class Constants {
     public static final int RIGHTSLAVEPORT = 4;
     public static final int HarambePort = 5;
     public static final int StaircasePort = 6;
+    public static final int CuriousJorge = 7;
+    public static final int TeboPort = 8;
    
     //USB      
     public static final int DRIVERSTICKPORT = 0;
     public static final int OPERATORSTICKPORT = 1;
 
     // Buttons   OP = Operatorstick       DR = Driverstick
-    public static final int OPHarambeStrong = 5;
-    public static final int OPHarambeWeak= 3;
-    public static final int OPStaircaseUp = 6;
-    public static final int OPStaricasDown = 7;
-
+    public static final int OPHarambeStrong = 12;
+    public static final int OPHarambeWeak= 11;
+    public static final int OPCheetahIn = 6;
+    public static final int OPCheetahOut = 4;
+    public static final int DRStaircaseUp = 3;
+    public static final int DRStaricasDown = 4;
+    public static final int DRIntakein = 1;
+    public static final int DRIntakeout = 5;
+    public static final int DRTeboShoot = 2;
+    public static final int DRPneumatics = 6;
+    
     // MISC CONSTANTS
-    public static final double COUNTSPERREVOLUTION = 1440.0;
    
 
 

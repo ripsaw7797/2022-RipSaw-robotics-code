@@ -33,10 +33,10 @@
  */
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import edu.wpi.first.wpilibj.Encoder;
 
 import frc.robot.Constants;
@@ -54,7 +54,7 @@ public class Drivetrain extends SubsystemBase {
   WPI_VictorSPX _rghtFront = new WPI_VictorSPX(Constants.RIGHTMASTERPORT);
   WPI_VictorSPX _rghtFollower = new WPI_VictorSPX(Constants.RIGHTSLAVEPORT);
 
-
+  // Grouped motor controllers
   DifferentialDrive _diffDrive = new DifferentialDrive(_leftFront, _rghtFront);
 
   public void manualDrive(double move, double turn) {
@@ -93,9 +93,6 @@ public class Drivetrain extends SubsystemBase {
     _rghtFollower.setInverted(InvertType.FollowMaster);
     _leftFollower.setInverted(InvertType.FollowMaster);
 
-
-
-    
     /*
      * [4] adjust sensor phase so sensor moves positive when Talon LEDs are green
      */
@@ -110,15 +107,14 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public Drivetrain() {
-    m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
+    m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
     resetEncoders();
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
     _diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
-
 
 public void resetEncoders() {
   m_leftEncoder.reset();

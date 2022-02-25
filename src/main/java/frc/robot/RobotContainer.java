@@ -4,21 +4,26 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Harambe;
-import frc.robot.subsystems.Staircase;
-import frc.robot.commands.AutoDoNothing;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutonomousDistance;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.AutonomousTime;
+import frc.robot.commands.TogglePneumatics;
+import frc.robot.subsystems.CuriousJorge;
+import edu.wpi.first.wpilibj.GenericHID;
+import frc.robot.commands.AutoDoNothing;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Staircase;
+import frc.robot.subsystems.Tebo;
+import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.Harambe;
+import frc.robot.subsystems.PneumaticSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,12 +31,16 @@ import frc.robot.commands.AutonomousTime;
  * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
  * subsystems, commands, and button mappings) should be declared here.
  */
+
 public class RobotContainer {
 
   // The robot's subsystems
   private final Harambe m_Harambe = new Harambe ();
-  private final  Drivetrain m_drivetrain = new Drivetrain ();
-  private final  Staircase m_Staircase = new Staircase ();
+  private final Drivetrain m_drivetrain = new Drivetrain ();
+  private final Staircase m_Staircase = new Staircase ();
+  private final CuriousJorge m_CuriousJorge = new CuriousJorge();
+  private final Tebo m_Tebo = new Tebo();
+  private final PneumaticSubsystem m_pneumaticSubsystem = new PneumaticSubsystem();
 
   // The robot's commands
   Command m_autonomousCommand;
@@ -44,6 +53,8 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+
+    m_pneumaticSubsystem.InitPneumatics();
 
     // Configure the button bindings
     configureButtonBindings();
@@ -72,35 +83,58 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     new JoystickButton(m_operatorstick, Constants.OPHarambeStrong).whenPressed(
-      new InstantCommand(m_Harambe::raise, m_Harambe)
+      new InstantCommand(m_Harambe::strong, m_Harambe)
     ).whenReleased(
       new InstantCommand(m_Harambe::stop, m_Harambe)
     );
 
     new JoystickButton(m_operatorstick, Constants.OPHarambeWeak).whenPressed(
-      new InstantCommand(m_Harambe::lower, m_Harambe)
+      new InstantCommand(m_Harambe::weak, m_Harambe)
     ).whenReleased(
       new InstantCommand(m_Harambe::stop, m_Harambe)
     );
 
-    new JoystickButton(m_operatorstick, Constants.OPStaircaseUp).whenPressed(
-      new InstantCommand(m_Staircase::lower, m_Staircase)
+    new JoystickButton(m_driverstick, Constants.DRStaircaseUp).whenPressed(
+      new InstantCommand(m_Staircase::raise, m_Staircase)
     ).whenReleased(
       new InstantCommand(m_Staircase::stop, m_Staircase)
     );
 
-    new JoystickButton(m_operatorstick, Constants.OPStaricasDown).whenPressed(
+    new JoystickButton(m_driverstick, Constants.DRStaricasDown).whenPressed(
       new InstantCommand(m_Staircase::lower, m_Harambe)
     ).whenReleased(
       new InstantCommand(m_Staircase::stop, m_Staircase)
     );
+
+    new JoystickButton(m_driverstick, Constants.DRIntakein).whenPressed(
+      new InstantCommand(m_CuriousJorge::in, m_CuriousJorge)
+    ).whenReleased(
+      new InstantCommand(m_CuriousJorge::stop, m_CuriousJorge)
+    );
+    
+    new JoystickButton(m_driverstick, Constants.DRIntakeout).whenPressed(
+      new InstantCommand(m_CuriousJorge::out, m_CuriousJorge)
+    ).whenReleased(
+      new InstantCommand(m_CuriousJorge::stop, m_CuriousJorge)
+    );    
+    
+    new JoystickButton(m_driverstick, Constants.DRTeboShoot).whenPressed(
+      new InstantCommand(m_Tebo::shoot, m_Tebo)
+    ).whenReleased(
+      new InstantCommand(m_Tebo::stop, m_Tebo)
+    );    
+
+    new JoystickButton(m_driverstick, Constants.DRPneumatics)
+        .whenPressed(new TogglePneumatics(m_pneumaticSubsystem));
   }
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
+
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_autonomousCommand = m_chooser.getSelected();

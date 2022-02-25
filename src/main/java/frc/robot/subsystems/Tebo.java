@@ -11,30 +11,24 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Constants;
 
-public class Harambe extends SubsystemBase {
+public class Tebo extends SubsystemBase {
 
-  private WPI_VictorSPX HarambeVictorSPX = new WPI_VictorSPX(Constants.HarambePort);
+  private TalonFX TeboTalonFX = new TalonFX(Constants.TeboPort);
   
-  /**
-   * Creates a new ElevatorSubsystem.
-   */
-  
-  public Harambe() {
+  public Tebo() {
 
   }
-  public void strong(){
-    HarambeVictorSPX.set(ControlMode.PercentOutput, 0.8);
+  public void shoot(){
+    TeboTalonFX.set(ControlMode.PercentOutput, -.30);
   }
-  public void weak(){
-    HarambeVictorSPX.set(ControlMode.PercentOutput, -0.8);
-  }
+
   public void stop(){
-    HarambeVictorSPX.set(ControlMode.PercentOutput, 0);
+    TeboTalonFX.set(ControlMode.PercentOutput, 0);
   }
 
   @Override
