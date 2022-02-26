@@ -12,9 +12,10 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+
 public final class Constants {
 
-    // Encoders   Rambo
+    // Encoders  
 
     // PWM
 
@@ -33,6 +34,10 @@ public final class Constants {
     //USB      
     public static final int DRIVERSTICKPORT = 0;
     public static final int OPERATORSTICKPORT = 1;
+
+    // Cameras
+    public static final int cameraPort = 2;
+    public static final int cameraPort2 = 1;
 
     // Buttons   OP = Operatorstick       DR = Driverstick
     public static final int OPHarambeStrong = 12;
