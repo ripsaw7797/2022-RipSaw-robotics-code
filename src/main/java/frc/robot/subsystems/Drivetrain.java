@@ -43,8 +43,8 @@ import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
   // Encoders
-  private static final double kCountsPerRevolution = 1440.0;
-  private static final double kWheelDiameterInch = 2.75591; // 70 mm
+  private static final double kCountsPerRevolution = 975.6;
+  private static final double kWheelDiameterInch = 6; // 70 mm
   private final Encoder m_leftEncoder = new Encoder(4, 5);
   private final Encoder m_rightEncoder = new Encoder(6, 7);
   

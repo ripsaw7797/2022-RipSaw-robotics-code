@@ -36,7 +36,7 @@ public final class Constants {
     public static final int OPERATORSTICKPORT = 1;
 
     // Cameras
-    public static final int cameraPort = 2;
+    public static final int cameraPort = 0;
     public static final int cameraPort2 = 1;
 
     // Buttons   OP = Operatorstick       DR = Driverstick

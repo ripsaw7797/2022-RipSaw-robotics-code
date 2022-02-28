@@ -9,21 +9,21 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.subsystems.PneumaticSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutonomousDistance;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.commands.AutonomousTime;
 import frc.robot.commands.TogglePneumatics;
+import frc.robot.commands.AutonomousTime;
 import frc.robot.subsystems.CuriousJorge;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Staircase;
-import frc.robot.subsystems.Tebo;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.Staircase;
 import frc.robot.subsystems.Harambe;
-import frc.robot.subsystems.PneumaticSubsystem;
+import frc.robot.subsystems.Tebo;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,13 +35,15 @@ import frc.robot.subsystems.PneumaticSubsystem;
 public class RobotContainer {
 
   // The robot's subsystems
-  private final Harambe m_Harambe = new Harambe ();
+  private final PneumaticSubsystem m_pneumaticSubsystem = new PneumaticSubsystem();
+  private final CuriousJorge m_CuriousJorge = new CuriousJorge();
   private final Drivetrain m_drivetrain = new Drivetrain ();
   private final Staircase m_Staircase = new Staircase ();
-  private final CuriousJorge m_CuriousJorge = new CuriousJorge();
+  private final Harambe m_Harambe = new Harambe ();
   private final Tebo m_Tebo = new Tebo();
-  private final PneumaticSubsystem m_pneumaticSubsystem = new PneumaticSubsystem();
 
+  CameraServer server;
+  CameraServer server2;
   // The robot's commands
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser;
@@ -53,7 +55,8 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-
+    
+    
     m_pneumaticSubsystem.InitPneumatics();
 
     // Configure the button bindings
@@ -69,7 +72,7 @@ public class RobotContainer {
     // Setup autonomous select commands
     m_chooser = new SendableChooser<>();
     m_chooser.setDefaultOption("Autonomous Time", new AutonomousTime(m_drivetrain));
-    m_chooser.addOption("Autonomous Distance", new AutonomousDistance(m_drivetrain));
+    m_chooser.addOption("Autonomous Distance", new AutonomousDistance(m_drivetrain, m_Tebo));
     m_chooser.addOption("Do nothing", new AutoDoNothing());
     SmartDashboard.putData(m_chooser);
   }

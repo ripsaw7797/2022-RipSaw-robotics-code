@@ -24,7 +24,17 @@ public class Tebo extends SubsystemBase {
 
   }
   public void shoot(){
-    TeboTalonFX.set(ControlMode.PercentOutput, -.30);
+    TeboTalonFX.set(ControlMode.Velocity, -.75);
+  }
+
+  public void highshooter (){
+    TeboTalonFX.set(ControlMode.PercentOutput,-.65);
+
+  }
+
+  public void lowshooter(){
+    TeboTalonFX.set(ControlMode.PercentOutput, -30);
+
   }
 
   public void stop(){
