@@ -25,7 +25,7 @@ public class ShooterAuto extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   m_tebo.shoot();
+   m_tebo.launchpad();
 
   }
 

@@ -44,6 +44,9 @@ public final class Constants {
     public static final int OPHarambeWeak= 11;
     public static final int OPCheetahIn = 6;
     public static final int OPCheetahOut = 4;
+    public static final int OPLowShooter = 1;
+    public static final int OPHighShooter = 2;
+    public static final int OPLaunchPadShooter = 3; 
     public static final int DRStaircaseUp = 3;
     public static final int DRStaricasDown = 4;
     public static final int DRIntakein = 1;

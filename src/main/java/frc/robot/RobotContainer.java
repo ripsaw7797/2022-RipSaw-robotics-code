@@ -97,6 +97,24 @@ public class RobotContainer {
       new InstantCommand(m_Harambe::stop, m_Harambe)
     );
 
+    new JoystickButton(m_operatorstick, Constants.OPLaunchPadShooter).whenPressed(
+      new InstantCommand(m_Tebo::launchpad, m_Tebo)
+    ).whenReleased(
+      new InstantCommand(m_Tebo::stop, m_Tebo)
+    );
+    
+    new JoystickButton(m_operatorstick, Constants.OPHighShooter).whenPressed(
+      new InstantCommand(m_Tebo::highshooter, m_Tebo)
+    ).whenReleased(
+      new InstantCommand(m_Tebo::stop, m_Tebo)
+    );
+    
+    new JoystickButton(m_operatorstick, Constants.OPLowShooter).whenPressed(
+      new InstantCommand(m_Tebo::lowshooter, m_Tebo)
+    ).whenReleased(
+      new InstantCommand(m_Tebo::stop, m_Tebo)
+    );
+
     new JoystickButton(m_driverstick, Constants.DRStaircaseUp).whenPressed(
       new InstantCommand(m_Staircase::raise, m_Staircase)
     ).whenReleased(
@@ -122,7 +140,7 @@ public class RobotContainer {
     );    
     
     new JoystickButton(m_driverstick, Constants.DRTeboShoot).whenPressed(
-      new InstantCommand(m_Tebo::shoot, m_Tebo)
+      new InstantCommand(m_Tebo::lowshooter, m_Tebo)
     ).whenReleased(
       new InstantCommand(m_Tebo::stop, m_Tebo)
     );    

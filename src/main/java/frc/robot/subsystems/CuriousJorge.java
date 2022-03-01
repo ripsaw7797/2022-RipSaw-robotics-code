@@ -28,7 +28,7 @@ public class CuriousJorge extends SubsystemBase {
 
   }
   public void in(){
-    curiousJorgeVictorSPX.set(ControlMode.PercentOutput, 0.6);
+    curiousJorgeVictorSPX.set(ControlMode.PercentOutput, 0.75);
   }
   public void out(){
     curiousJorgeVictorSPX.set(ControlMode.PercentOutput, -0.6);
