@@ -10,13 +10,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.PneumaticSubsystem;
+import frc.robot.subsystems.PurpleMonkey;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutonomousDistance;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.TogglePneumatics;
 import frc.robot.commands.AutonomousTime;
 import frc.robot.subsystems.CuriousJorge;
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import frc.robot.commands.AutoDoNothing;
 import frc.robot.subsystems.Drivetrain;
@@ -36,14 +36,14 @@ public class RobotContainer {
 
   // The robot's subsystems
   private final PneumaticSubsystem m_pneumaticSubsystem = new PneumaticSubsystem();
+  private final PurpleMonkey m_PurpleMonkey = new PurpleMonkey();
   private final CuriousJorge m_CuriousJorge = new CuriousJorge();
   private final Drivetrain m_drivetrain = new Drivetrain ();
   private final Staircase m_Staircase = new Staircase ();
   private final Harambe m_Harambe = new Harambe ();
   private final Tebo m_Tebo = new Tebo();
 
-  CameraServer server;
-  CameraServer server2;
+
   // The robot's commands
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser;
@@ -115,6 +115,18 @@ public class RobotContainer {
       new InstantCommand(m_Tebo::stop, m_Tebo)
     );
 
+    new JoystickButton(m_operatorstick, Constants.OPPurpleMonkeyStrong).whenPressed(
+      new InstantCommand(m_PurpleMonkey::weak, m_PurpleMonkey)
+    ).whenReleased(
+      new InstantCommand(m_PurpleMonkey::stop, m_PurpleMonkey)
+    );
+
+    new JoystickButton(m_operatorstick, Constants.OPPurpleMonkeyWeak).whenPressed(
+      new InstantCommand(m_PurpleMonkey::strong, m_PurpleMonkey)
+    ).whenReleased(
+      new InstantCommand(m_PurpleMonkey::stop, m_PurpleMonkey)
+    );
+
     new JoystickButton(m_driverstick, Constants.DRStaircaseUp).whenPressed(
       new InstantCommand(m_Staircase::raise, m_Staircase)
     ).whenReleased(
@@ -144,7 +156,7 @@ public class RobotContainer {
     ).whenReleased(
       new InstantCommand(m_Tebo::stop, m_Tebo)
     );    
-
+    
     new JoystickButton(m_driverstick, Constants.DRPneumatics)
         .whenPressed(new TogglePneumatics(m_pneumaticSubsystem));
   }

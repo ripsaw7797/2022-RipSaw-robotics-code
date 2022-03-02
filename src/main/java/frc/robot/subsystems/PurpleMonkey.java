@@ -11,36 +11,33 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import frc.robot.Constants;
 
-public class Tebo extends SubsystemBase {
+public class PurpleMonkey extends SubsystemBase {
 
-  private TalonFX TeboTalonFX = new TalonFX(Constants.TeboPort);
+  private Spark PurpleMonkeySpark = new Spark(Constants.PurpleMonkeyPort);
   
-  public Tebo() {
+  /**
+   * Creates a new ElevatorSubsystem.
+   */
+  
+  public PurpleMonkey() {
 
   }
-  public void launchpad(){
-    TeboTalonFX.set(ControlMode.Velocity, -.75);
+  public void strong(){
+    PurpleMonkeySpark.set(0.1);
   }
 
-  public void highshooter (){
-    TeboTalonFX.set(ControlMode.PercentOutput, -.65);
-  }
-
-  public void lowshooter(){
-    TeboTalonFX.set(ControlMode.PercentOutput, -1);
+  public void weak(){
+    PurpleMonkeySpark.set(-0.1);
   }
 
   public void stop(){
-    TeboTalonFX.set(ControlMode.PercentOutput, 0);
+    PurpleMonkeySpark.set(0);
   }
 
-  @Override
-  public void periodic() {
+
     // This method will be called once per scheduler run
   }
-}

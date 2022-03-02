@@ -30,7 +30,8 @@ public final class Constants {
     public static final int StaircasePort = 6;
     public static final int CuriousJorge = 7;
     public static final int TeboPort = 8;
-   
+    public static final int PurpleMonkeyPort = 9;
+
     //USB      
     public static final int DRIVERSTICKPORT = 0;
     public static final int OPERATORSTICKPORT = 1;
@@ -42,11 +43,11 @@ public final class Constants {
     // Buttons   OP = Operatorstick       DR = Driverstick
     public static final int OPHarambeStrong = 12;
     public static final int OPHarambeWeak= 11;
-    public static final int OPCheetahIn = 6;
-    public static final int OPCheetahOut = 4;
     public static final int OPLowShooter = 1;
     public static final int OPHighShooter = 2;
     public static final int OPLaunchPadShooter = 3; 
+    public static final int OPPurpleMonkeyStrong = 10;
+    public static final int OPPurpleMonkeyWeak = 9;
     public static final int DRStaircaseUp = 3;
     public static final int DRStaricasDown = 4;
     public static final int DRIntakein = 1;
